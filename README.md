@@ -25,20 +25,22 @@ Use this to prototype creative automated workflows, e.g. AI‑generated image ca
 
 ## 3. Setup Instructions
 
-   3.1. **Clone** the repo:
+   ### 3.1. **Clone** the repo:
 
       ```bash
       git clone https://github.com/yourusername/threads-auto-post.git
       cd threads-auto-post 
 
-   3.2. **Create & activate a virtual environment**:
+   ### 3.2. **Create & activate** a virtual environment:
+      ```bash
       python3 -m venv .venv
       source .venv/bin/activate
 
-   3.3. **Install** Python dependencies:
+   ### 3.3. **Install** Python dependencies:
+      ```bash
       pip install -r requirements.txt
 
-   3.4. **Register** your Threads app if you haven’t yet:
+   ### 3.4. **Register** your Threads app if you haven’t yet:
       - Go to the Threads/Meta developer portal
       - Create an application, note the App ID and App Secret
       - Configure your OAuth redirect URI (e.g. http://localhost:5000)
@@ -46,23 +48,25 @@ Use this to prototype creative automated workflows, e.g. AI‑generated image ca
 ---
 
 ## 4. Configuration Steps
-
-      # Anthropic AI
+   ```dotenv
+   # Anthropic AI
    ANTHROPIC_API_KEY=sk-...
    
-      # Threads credentials (for initial login)
+   # Threads credentials (for initial login)
    THREADS_USERNAME=your_threads_username
    THREADS_PASSWORD=your_threads_password
    
-      # Meta App credentials (for access/token management)
+   # Meta App credentials (for access/token management)
    THREADS_APP_ID=1234567890
    THREADS_APP_SECRET=abcdef1234567890abcdef1234567890
    
-      # (Optional) If you already have a long‑lived access token:
+   # (Optional) If you already have a long‑lived access token:
    THREADS_ACCESS_TOKEN=EAA...
    
-      # Flask secret key (will default to random if omitted)
+   # Flask secret key (will default to random if omitted)
    FLASK_SECRET_KEY=supersecret123
+
+   Security note: Never commit .env to source control. Add it to .gitignore.
 
 ---
 

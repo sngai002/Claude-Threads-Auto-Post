@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Claude Clone with Threads Auto-Post</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <div class="sidebar-header">
+                <img src="{{ url_for('static', filename='images/claude-logo.png') }}" alt="Claude Logo" class="logo">
+                <h1>Claude</h1>
+            </div>
+            <button id="new-chat-btn" class="new-chat-btn">
+                <i class="fas fa-plus"></i> New chat
+            </button>
+            <div class="sidebar-conversations">
+                <!-- Conversation history would go here -->
+            </div>
+            <div class="sidebar-footer">
+                <div class="user-info">
+                    <div class="user-avatar">
+                        <i class="fas fa-user"></i>
+                    </div>
+                    <div class="user-name">User</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main Content -->
+        <div class="main-content">
+            <!-- Chat Header -->
+            <div class="chat-header">
+                <h2>Chat with Claude</h2>
+                <div class="header-actions">
+                    <button id="clear-chat-btn" class="clear-chat-btn">
+                        <i class="fas fa-trash"></i> Clear chat
+                    </button>
+                </div>
+            </div>
+
+            <!-- Chat Messages -->
+            <div class="chat-messages" id="chat-messages">
+                <!-- Welcome message -->
+                <div class="message assistant-message">
+                    <div class="message-avatar">
+                        <img src="{{ url_for('static', filename='images/claude-avatar.png') }}" alt="Claude Avatar">
+                    </div>
+                    <div class="message-content">
+                        <p>Hello! I'm Claude, an AI assistant by Anthropic. How can I help you today?</p>
+                    </div>
+                </div>
+                <!-- Messages will be added here dynamically -->
+            </div>
+
+            <!-- Chat Input -->
+            <div class="chat-input-container">
+                <form id="chat-form" action="/api/chat" method = "post" enctype="multipart/form-data">
+                    <div class="input-wrapper">
+                        <textarea id="prompt-input" placeholder="Message Claude..." rows="1"></textarea>
+                        <div class="input-actions">
+                            <label for="image-upload" class="image-upload-label">
+                                <i class="fas fa-image"></i>
+                                <input type="file" id="image-upload" accept="image/*" style="display: none;">
+                            </label>
+                            <button type="submit" id="send-btn" disabled>
+                                <i class="fas fa-paper-plane"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div id="image-preview-container" class="image-preview-container" style="display: none;">
+                        <div class="image-preview">
+                            <img id="image-preview" src="" alt="Image Preview">
+                            <button type="button" id="remove-image-btn" class="remove-image-btn">
+                                <i class="fas fa-times"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="threads-status" id="threads-status">
+                        <span>Auto-posting to Threads: <span class="status-indicator">Enabled</span></span>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Loading Indicator -->
+    <div class="loading-container" id="loading-container" style="display: none;">
+        <div class="loading-spinner"></div>
+        <p>Processing your request...</p>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.6.1/socket.io.min.js"></script>
+    <script src="{{ url_for('static', filename='js/app.js') }}"></script>
+</body>
+</html>
